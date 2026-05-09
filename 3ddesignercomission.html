@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Designer Commission — Pro Event Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #0f0f0f;
+    --gray-1:  #1c1c1c;
+    --gray-2:  #4a4a4a;
+    --gray-3:  #888888;
+    --gray-4:  #c8c8c8;
+    --gray-5:  #e8e8e8;
+    --gray-6:  #f5f5f5;
+    --white:   #ffffff;
+    --accent:  #1a3a6b;
+    --accent-light: #edf1f8;
+    --accent-mid:   #3060b0;
+    --green:   #1a5c3a;
+    --green-light: #e8f4ee;
+    --gold:    #7a5c10;
+    --gold-light: #faf3e0;
+    --red:     #8b1a1a;
+    --red-light: #fdf0f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Anek Telugu', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── CONTAINER ── */
+  .page-wrap { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 0; }
+
+  /* ── HERO BAND ── */
+  .hero {
+    background: var(--accent);
+    color: white;
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 0;
+  }
+  .hero::after {
+    content: 'PES';
+    position: absolute;
+    right: 3rem; bottom: -1.5rem;
+    font-weight: 700;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    letter-spacing: -4px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.75rem;
+  }
+  .hero-title {
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .hero-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 3rem 0 0; }
+
+  /* ── LETTER ── */
+  .letter {
+    border: 1px solid var(--gray-5);
+    border-radius: 6px;
+    padding: 3rem 3.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .letter-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gray-3);
+    margin-bottom: 2rem;
+    letter-spacing: 0.06em;
+  }
+  .letter-greeting { font-weight: 600; font-size: 20px; margin-bottom: 1.25rem; color: var(--black); }
+  .letter-p { font-size: 15px; color: var(--gray-1); margin-bottom: 1rem; line-height: 1.85; }
+  .letter-p strong { color: var(--black); font-weight: 600; }
+
+  .notice {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-size: 14px;
+    color: var(--accent);
+    line-height: 1.75;
+    border-radius: 0 4px 4px 0;
+  }
+  .notice strong { color: var(--accent); font-weight: 600; }
+
+  .sign-block {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .sign-name { font-weight: 700; font-size: 17px; color: var(--black); }
+  .sign-title { font-size: 12px; color: var(--gray-3); margin-top: 2px; letter-spacing: 0.04em; }
+  .sign-contact {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gray-3);
+    line-height: 1.9;
+  }
+  .sign-contact a { color: var(--accent-mid); text-decoration: none; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header { margin-bottom: 1.5rem; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray-3);
+    margin-bottom: 4px;
+  }
+  .section-title { font-weight: 700; font-size: 22px; color: var(--black); letter-spacing: -0.3px; }
+
+  /* ── RATES TABLE ── */
+  .rates-table { width: 100%; border-collapse: collapse; margin-bottom: 3rem; font-size: 14px; }
+  .rates-table thead th {
+    background: var(--gray-6);
+    color: var(--gray-2);
+    padding: 10px 18px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gray-5);
+  }
+  .rates-table thead th:last-child { text-align: right; }
+  .rates-table tbody tr { border-bottom: 1px solid var(--gray-5); transition: background 0.1s; }
+  .rates-table tbody tr:last-child { border-bottom: none; }
+  .rates-table tbody tr:hover { background: var(--gray-6); }
+  .rates-table tbody td { padding: 15px 18px; vertical-align: middle; }
+  .rates-table tbody td:last-child { text-align: right; }
+
+  .pkg-name { font-weight: 600; font-size: 14px; color: var(--black); }
+  .pkg-tier-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    vertical-align: middle;
+  }
+  .badge-a { background: var(--green-light); color: var(--green); }
+  .badge-b { background: var(--gold-light); color: var(--gold); }
+  .mono { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gray-2); }
+  .rate-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .rate-green { background: var(--green-light); color: var(--green); border-color: #a8d5bc; }
+  .rate-blue  { background: var(--accent-light); color: var(--accent-mid); border-color: #b0c4e0; }
+  .comm-range { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--black); font-weight: 500; }
+  .comm-note  { font-size: 11px; color: var(--gray-3); margin-top: 2px; font-family: 'DM Mono', monospace; }
+
+  /* ── MILESTONES ── */
+  .milestone-row { display: flex; gap: 0; margin-bottom: 3rem; border: 1px solid var(--gray-5); border-radius: 6px; overflow: hidden; }
+  .ms-cell { flex: 1; padding: 1.75rem 1.5rem; border-right: 1px solid var(--gray-5); }
+  .ms-cell:last-child { border-right: none; }
+  .ms-num { font-weight: 700; font-size: 11px; letter-spacing: 0.1em; color: var(--gray-3); text-transform: uppercase; margin-bottom: 4px; }
+  .ms-pct { font-weight: 700; font-size: 34px; line-height: 1; margin-bottom: 6px; }
+  .ms-pct-1 { color: var(--accent); }
+  .ms-pct-2 { color: var(--gold); }
+  .ms-pct-3 { color: var(--green); }
+  .ms-title { font-weight: 600; font-size: 14px; color: var(--black); margin-bottom: 4px; }
+  .ms-desc  { font-size: 12px; color: var(--gray-3); line-height: 1.6; }
+  .ms-tag   { margin-top: 12px; display: inline-block; font-size: 11px; font-weight: 500; background: var(--accent-light); color: var(--accent); padding: 3px 10px; border-radius: 20px; }
+
+  /* ── KEY TERMS ── */
+  .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--gray-5); border: 1px solid var(--gray-5); border-radius: 6px; overflow: hidden; margin-bottom: 3rem; }
+  .term-cell { background: var(--white); padding: 1.5rem 1.75rem; }
+  .term-cell.wide { grid-column: 1 / -1; background: var(--gray-6); }
+  .term-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gray-3); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .term-title { font-weight: 600; font-size: 15px; color: var(--black); margin-bottom: 8px; }
+  .term-body { font-size: 13px; color: var(--gray-2); line-height: 1.75; }
+  .term-body strong { color: var(--black); font-weight: 600; }
+  .term-accent { border-top: 2px solid var(--accent); }
+  .term-gold   { border-top: 2px solid #c8a030; }
+  .term-green  { border-top: 2px solid var(--green); }
+  .term-black  { border-top: 2px solid var(--black); }
+
+  .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  .formula-step { font-size: 13px; color: var(--gray-2); line-height: 1.75; }
+  .formula-step strong { color: var(--black); font-weight: 600; display: block; margin-bottom: 2px; }
+  .formula-step em { color: var(--gray-3); font-style: normal; font-size: 12px; font-family: 'DM Mono', monospace; }
+
+  /* ── CALCULATOR ── */
+  .calc-wrap { border: 1px solid var(--gray-5); border-radius: 6px; overflow: hidden; margin-bottom: 3rem; }
+  .calc-head { background: var(--gray-6); padding: 1.5rem 2rem; border-bottom: 1px solid var(--gray-5); }
+  .calc-head-title { font-weight: 700; font-size: 18px; color: var(--black); }
+  .calc-head-sub { font-size: 12px; color: var(--gray-3); margin-top: 2px; }
+  .calc-body { padding: 2rem; }
+
+  .pkg-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .pkg-tab {
+    padding: 7px 16px;
+    border-radius: 4px;
+    border: 1px solid var(--gray-4);
+    background: var(--white);
+    color: var(--gray-2);
+    cursor: pointer;
+    font-family: 'Anek Telugu', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.12s;
+  }
+  .pkg-tab:hover { border-color: var(--accent); color: var(--accent); }
+  .pkg-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+  /* PRICE INPUT */
+  .input-section { margin-bottom: 2rem; }
+  .input-label { font-size: 12px; font-weight: 500; color: var(--gray-2); letter-spacing: 0.04em; margin-bottom: 8px; }
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid var(--gray-4);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .input-wrap:focus-within { border-color: var(--accent); }
+  .input-prefix {
+    padding: 0 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    color: var(--gray-3);
+    background: var(--gray-6);
+    border-right: 1.5px solid var(--gray-4);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  #customPrice {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Anek Telugu', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 0 18px;
+    height: 52px;
+    letter-spacing: -0.3px;
+    min-width: 0;
+  }
+  #customPrice::placeholder { color: var(--gray-4); }
+  #customPrice::-webkit-outer-spin-button,
+  #customPrice::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  #customPrice[type=number] { -moz-appearance: textfield; }
+  .input-hint { font-size: 11px; color: var(--gray-3); margin-top: 7px; font-family: 'DM Mono', monospace; }
+  .input-hint span { color: var(--gray-2); }
+
+  /* RESULTS */
+  .results-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+  .result-card { border: 1px solid var(--gray-5); border-radius: 6px; padding: 1.25rem 1.5rem; }
+  .result-card.highlight { background: var(--accent); border-color: var(--accent); }
+  .r-label { font-size: 11px; font-weight: 500; color: var(--gray-3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .r-label.light { color: rgba(255,255,255,0.6); }
+  .r-value { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--black); }
+  .r-value.light { color: white; font-size: 24px; }
+  .r-sub { font-size: 11px; color: var(--gray-3); margin-top: 3px; }
+  .r-sub.light { color: rgba(255,255,255,0.55); }
+
+  /* BREAKDOWN TABLE */
+  .breakdown { border: 1px solid var(--gray-5); border-radius: 6px; overflow: hidden; }
+  .breakdown-head {
+    display: grid;
+    grid-template-columns: 2.5fr 0.8fr 1.2fr 1.2fr;
+    padding: 9px 16px;
+    background: var(--gray-6);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--gray-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gray-5);
+  }
+  .breakdown-row {
+    display: grid;
+    grid-template-columns: 2.5fr 0.8fr 1.2fr 1.2fr;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--gray-5);
+    font-size: 13px;
+    align-items: center;
+  }
+  .breakdown-row:last-child { border-bottom: none; }
+  .br-name { color: var(--gray-1); font-size: 13px; }
+  .br-pct  { color: var(--gray-3); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .br-val  { color: var(--gray-2); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .br-comm { color: var(--accent-mid); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+
+  .alert { margin-top: 1rem; border-radius: 4px; padding: 10px 14px; font-size: 12px; display: none; line-height: 1.6; }
+  .alert.show { display: block; }
+  .alert-min   { background: var(--red-light); border: 1px solid #e0b0b0; color: var(--red); }
+  .alert-range { background: var(--gold-light); border: 1px solid #d4b870; color: var(--gold); }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--gray-6);
+    border: 1px solid var(--gray-5);
+    border-radius: 6px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+  .footer-left { font-size: 13px; color: var(--gray-2); }
+  .footer-left strong { color: var(--black); font-weight: 600; }
+  .footer-right { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gray-3); text-align: right; line-height: 1.9; letter-spacing: 0.06em; }
+
+  /* ── DIVIDER ── */
+  .section-divider { border: none; border-top: 1px solid var(--gray-5); margin: 3rem 0; }
+
+  @media (max-width: 640px) {
+    .page-wrap { padding: 1rem 1rem 0; }
+    .hero { padding: 1.75rem 1.5rem; }
+    .hero-title { font-size: 26px; }
+    .main { padding: 2rem 0 3rem; }
+    .letter { padding: 1.75rem 1.25rem; }
+    .sign-block { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .terms-grid { grid-template-columns: 1fr; }
+    .term-cell.wide { grid-column: 1; }
+    .formula-grid { grid-template-columns: 1fr; }
+    .milestone-row { flex-direction: column; }
+    .ms-cell { border-right: none; border-bottom: 1px solid var(--gray-5); }
+    .ms-cell:last-child { border-bottom: none; }
+    .results-row { grid-template-columns: 1fr; }
+    .breakdown-head, .breakdown-row { grid-template-columns: 2fr 0.6fr 1fr; }
+    .breakdown-head span:nth-child(3), .br-val { display: none; }
+    .footer { padding: 1.25rem; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">PES</div>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:white;">Pro Event Solutions</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);">Event Supplies & Management · Kota Kinabalu, Sabah</div>
+      </div>
+    </div>
+    <div style="text-align:right;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);line-height:1.9;">
+      <div>REF: PES-COMM-2025</div>
+      <div>DATE: May 2025</div>
+      <div>DEPT: 3D Design Division</div>
+    </div>
+  </div>
+  <div class="hero-label">Official Internal Document</div>
+  <h1 class="hero-title">3D Designer Commission</h1>
+  <div class="hero-sub">Freelance Booth Design — Rates, Terms & Payment Structure</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LETTER -->
+  <div class="letter">
+    <div class="letter-date">Kota Kinabalu, Sabah &nbsp;·&nbsp; May 2025</div>
+    <p class="letter-greeting">Dear Designer,</p>
+    <p class="letter-p">
+      Thank you for joining the Pro Event Solutions freelance design network. This document sets out the commission structure, project workflow, and payment terms applicable to all booth 3D design projects referred to you through our company. Please read this carefully before committing to any project.
+    </p>
+    <p class="letter-p">
+      Pro Event Solutions provides event supplies and full event management services across Kota Kinabalu and Tuaran, Sabah. As part of our growing offerings, we commission professional 3D booth design renderings for our clients. You are engaged as an independent designer under the terms below.
+    </p>
+    <p class="letter-p">
+      All projects begin with a <strong>free Phase 1 concept draft</strong> — one draft only, based on the client's budget and brief. This phase is unpaid. Your commission activates only once the client confirms and pays the <strong>30% deposit</strong>, at which point you may proceed to Phase 2 detailed work.
+    </p>
+    <div class="notice">
+      <strong>Please note:</strong> Do not begin detailed Phase 2 work before the 30% deposit is confirmed received by Pro Event Solutions. Starting work early is entirely at your own risk and cannot be guaranteed for compensation.
+    </div>
+    <p class="letter-p">
+      Commission is calculated based on the project value and your applicable package rate. A <strong>minimum commission of RM 300</strong> applies across all packages. In the event of project cancellation, you retain all milestone payments already disbursed — no refunds will be requested.
+    </p>
+    <p class="letter-p">
+      We look forward to a productive working relationship. If you have any questions regarding this agreement, please contact us before accepting a project.
+    </p>
+    <div class="sign-block">
+      <div>
+        <div class="sign-name">Pro Event Solutions</div>
+        <div class="sign-title">Management · 3D Design Division</div>
+      </div>
+      <div class="sign-contact">
+        <div>proeventsolutions88@gmail.com</div>
+        <div>+60 18-357 0998</div>
+        <div>www.eventsolutions.my</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RATES TABLE -->
+  <div class="section-header">
+    <div class="section-label">Section 1</div>
+    <div class="section-title">Commission Rates by Package</div>
+  </div>
+
+  <table class="rates-table">
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>Project Value</th>
+        <th>Your Rate</th>
+        <th>Estimated Commission</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="pkg-name">Starter</span>
+          <span class="pkg-tier-badge badge-a">Standard</span>
+        </td>
+        <td><span class="mono">RM 5,000 – 10,000</span></td>
+        <td><span class="rate-tag rate-green">10%</span></td>
+        <td>
+          <div class="comm-range">RM 100 – 200</div>
+          <div class="comm-note">min. RM 300 applied</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="pkg-name">Medium</span>
+          <span class="pkg-tier-badge badge-a">Standard</span>
+        </td>
+        <td><span class="mono">RM 15,000 – 20,000</span></td>
+        <td><span class="rate-tag rate-green">9.8%</span></td>
+        <td>
+          <div class="comm-range">RM 300 – 392</div>
+          <div class="comm-note">min. RM 300 applied</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="pkg-name">Grow</span>
+          <span class="pkg-tier-badge badge-b">Senior</span>
+        </td>
+        <td><span class="mono">RM 25,000 – 50,000</span></td>
+        <td><span class="rate-tag rate-blue">9%</span></td>
+        <td><div class="comm-range">RM 450 – 900</div></td>
+      </tr>
+      <tr>
+        <td>
+          <span class="pkg-name">Gold</span>
+          <span class="pkg-tier-badge badge-b">Senior</span>
+        </td>
+        <td><span class="mono">RM 55,000 – 80,000</span></td>
+        <td><span class="rate-tag rate-blue">8.8%</span></td>
+        <td><div class="comm-range">RM 968 – 1,408</div></td>
+      </tr>
+      <tr>
+        <td>
+          <span class="pkg-name">Platinum</span>
+          <span class="pkg-tier-badge badge-b">Senior</span>
+        </td>
+        <td><span class="mono">RM 85,000 – 100,000</span></td>
+        <td><span class="rate-tag rate-blue">8.5%</span></td>
+        <td><div class="comm-range">RM 1,445 – 1,700</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- MILESTONES -->
+  <div class="section-header">
+    <div class="section-label">Section 2</div>
+    <div class="section-title">Payment Milestone Structure</div>
+  </div>
+
+  <div class="milestone-row">
+    <div class="ms-cell">
+      <div class="ms-num">Milestone 1</div>
+      <div class="ms-pct ms-pct-1">30%</div>
+      <div class="ms-title">Client Deposit</div>
+      <div class="ms-desc">Client pays to confirm the project. Phase 2 begins only after this is received.</div>
+      <div class="ms-tag">⚡ Commission activates here</div>
+    </div>
+    <div class="ms-cell">
+      <div class="ms-num">Milestone 2</div>
+      <div class="ms-pct ms-pct-2">40%</div>
+      <div class="ms-title">Draft Approved</div>
+      <div class="ms-desc">Client approves the detailed 3D design draft and pays the second milestone.</div>
+    </div>
+    <div class="ms-cell">
+      <div class="ms-num">Milestone 3</div>
+      <div class="ms-pct ms-pct-3">30%</div>
+      <div class="ms-title">Final Delivery</div>
+      <div class="ms-desc">All final production-ready files are delivered. Final payment is collected.</div>
+    </div>
+  </div>
+
+  <!-- KEY TERMS -->
+  <div class="section-header">
+    <div class="section-label">Section 3</div>
+    <div class="section-title">Key Terms & Conditions</div>
+  </div>
+
+  <div class="terms-grid">
+    <div class="term-cell term-accent">
+      <div class="term-num">01</div>
+      <div class="term-title">Phase 1 is Unpaid</div>
+      <div class="term-body">You provide <strong>one concept draft only</strong>, at no charge, based on the client brief and quotation provided by Pro Event Solutions. Do not invest more than this at the initial stage.</div>
+    </div>
+    <div class="term-cell term-gold">
+      <div class="term-num">02</div>
+      <div class="term-title">Minimum RM 300</div>
+      <div class="term-body">Your commission will never fall below <strong>RM 300 per project</strong> regardless of the calculated amount. This protection applies to all packages without exception.</div>
+    </div>
+    <div class="term-cell term-green">
+      <div class="term-num">03</div>
+      <div class="term-title">Cancellation Policy</div>
+      <div class="term-body">If a project is cancelled at any stage, you <strong>retain all milestone payments already disbursed</strong>. No clawback. Payments made are final and non-refundable.</div>
+    </div>
+    <div class="term-cell term-black">
+      <div class="term-num">04</div>
+      <div class="term-title">Deposit First</div>
+      <div class="term-body">Never commence Phase 2 work until Pro Event Solutions confirms the <strong>30% client deposit has been received</strong>. Early work is not covered under this commission agreement.</div>
+    </div>
+    <div class="term-cell wide">
+      <div class="term-num">05 — Formula Reference</div>
+      <div class="term-title">How Your Commission is Calculated</div>
+      <div class="formula-grid">
+        <div class="formula-step">
+          <strong>Step 1 — Base</strong>
+          Project value × internal margin rate<br>
+          <em>Internal rate is managed by Pro Event Solutions</em>
+        </div>
+        <div class="formula-step">
+          <strong>Step 2 — Your Commission</strong>
+          Base amount × your package rate (8.5%–10%)<br>
+          <em>Rate is determined by the project package tier</em>
+        </div>
+        <div class="formula-step">
+          <strong>Step 3 — Minimum Floor</strong>
+          If result is below RM 300 → RM 300 is paid<br>
+          <em>Minimum applies regardless of calculation</em>
+        </div>
+        <div class="formula-step">
+          <strong>Step 4 — Milestone Disbursement</strong>
+          Commission is split across all 3 milestones<br>
+          <em>Begins only after 30% deposit is confirmed</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="section-header">
+    <div class="section-label">Section 4</div>
+    <div class="section-title">Commission Calculator</div>
+  </div>
+
+  <div style="background:var(--accent);border-radius:6px;padding:2rem;font-family:'Anek Telugu',sans-serif;position:relative;overflow:hidden;">
+  <div style="position:absolute;right:2rem;bottom:-1.5rem;font-weight:700;font-size:100px;color:rgba(255,255,255,0.05);letter-spacing:-4px;line-height:1;pointer-events:none;user-select:none;">PES</div>
+
+    <div style="font-size:18px;font-weight:700;color:#ffffff;margin-bottom:3px;">Estimate Your Earnings</div>
+    <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1.75rem;">Pro Event Solutions · 3D Booth Design</div>
+
+    <div id="pkgRow" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.75rem;">
+      <button class="cpkg" data-pkg="starter" onclick="selPkg(this)" style="padding:7px 15px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.55);cursor:pointer;font-family:'Anek Telugu',sans-serif;font-size:13px;font-weight:500;">Starter</button>
+      <button class="cpkg active-pkg" data-pkg="medium" onclick="selPkg(this)" style="padding:7px 15px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.6);background:rgba(255,255,255,0.2);color:#fff;cursor:pointer;font-family:'Anek Telugu',sans-serif;font-size:13px;font-weight:500;">Medium</button>
+      <button class="cpkg" data-pkg="grow" onclick="selPkg(this)" style="padding:7px 15px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.55);cursor:pointer;font-family:'Anek Telugu',sans-serif;font-size:13px;font-weight:500;">Grow</button>
+      <button class="cpkg" data-pkg="gold" onclick="selPkg(this)" style="padding:7px 15px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.55);cursor:pointer;font-family:'Anek Telugu',sans-serif;font-size:13px;font-weight:500;">Gold</button>
+      <button class="cpkg" data-pkg="platinum" onclick="selPkg(this)" style="padding:7px 15px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.55);cursor:pointer;font-family:'Anek Telugu',sans-serif;font-size:13px;font-weight:500;">Platinum</button>
+    </div>
+
+    <div style="margin-bottom:1.75rem;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+        <span style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Project value</span>
+        <span id="cHintRange" style="font-size:11px;color:rgba(255,255,255,0.28);font-family:'DM Mono',monospace;">RM 15,000 – RM 20,000</span>
+      </div>
+      <div style="text-align:center;margin-bottom:1rem;">
+        <div id="cValBig" style="font-size:44px;font-weight:700;color:#ffffff;letter-spacing:-1px;line-height:1;">RM 17,500</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;">drag to adjust</div>
+      </div>
+      <div id="cSliderWrap" style="position:relative;height:40px;display:flex;align-items:center;cursor:pointer;user-select:none;">
+        <div id="cTrack" style="width:100%;height:4px;background:rgba(255,255,255,0.12);border-radius:2px;position:relative;">
+          <div id="cFill" style="height:4px;background:#ffffff;border-radius:2px;position:absolute;left:0;top:0;width:50%;pointer-events:none;"></div>
+          <div id="cThumb" style="width:22px;height:22px;border-radius:50%;background:var(--accent);border:3px solid #ffffff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);cursor:grab;transition:transform 0.05s;"></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px;">
+        <span id="cLimitMin" style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.22);">RM 15,000</span>
+        <span id="cLimitMax" style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.22);">RM 20,000</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;">
+      <div style="background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:6px;padding:12px 14px;">
+        <div id="cRateLabel" style="font-size:10px;color:rgba(255,255,255,0.38);letter-spacing:0.09em;text-transform:uppercase;margin-bottom:5px;">Commission rate</div>
+        <div id="cResRate" style="font-family:'DM Mono',monospace;font-size:19px;font-weight:500;color:#ffffff;">9.8%</div>
+        <div id="cResRateSub" style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:3px;">Medium package</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:6px;padding:12px 14px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.38);letter-spacing:0.09em;text-transform:uppercase;margin-bottom:5px;">Your total commission</div>
+        <div id="cResComm" style="font-family:'DM Mono',monospace;font-size:21px;font-weight:500;color:#f5865a;">RM 343</div>
+        <div id="cResCommSub" style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:3px;">after deposit paid</div>
+      </div>
+    </div>
+
+    <div style="border:0.5px solid rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:2fr 0.7fr 1.1fr 1.1fr;padding:8px 14px;background:rgba(255,255,255,0.05);font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;border-bottom:0.5px solid rgba(255,255,255,0.08);">
+        <span>Milestone</span><span>%</span><span>Client pays</span><span>Your comm.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 0.7fr 1.1fr 1.1fr;padding:11px 14px;border-bottom:0.5px solid rgba(255,255,255,0.07);font-size:13px;align-items:center;">
+        <span style="color:rgba(255,255,255,0.65);">Deposit <span style="font-size:11px;color:rgba(255,255,255,0.3);">— activates comm.</span></span>
+        <span style="color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;font-size:12px;">30%</span>
+        <span id="cm1v" style="color:rgba(255,255,255,0.5);font-family:'DM Mono',monospace;font-size:12px;">5,250</span>
+        <span id="cm1c" style="color:rgba(255,255,255,0.95);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;">RM 114</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 0.7fr 1.1fr 1.1fr;padding:11px 14px;border-bottom:0.5px solid rgba(255,255,255,0.07);font-size:13px;align-items:center;">
+        <span style="color:rgba(255,255,255,0.65);">Draft approved</span>
+        <span style="color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;font-size:12px;">40%</span>
+        <span id="cm2v" style="color:rgba(255,255,255,0.5);font-family:'DM Mono',monospace;font-size:12px;">7,000</span>
+        <span id="cm2c" style="color:rgba(255,255,255,0.95);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;">RM 114</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 0.7fr 1.1fr 1.1fr;padding:11px 14px;font-size:13px;align-items:center;">
+        <span style="color:rgba(255,255,255,0.65);">Final delivery</span>
+        <span style="color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;font-size:12px;">30%</span>
+        <span id="cm3v" style="color:rgba(255,255,255,0.5);font-family:'DM Mono',monospace;font-size:12px;">5,250</span>
+        <span id="cm3c" style="color:rgba(255,255,255,0.95);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;">RM 115</span>
+      </div>
+    </div>
+
+    <div id="cMinWarn" style="display:none;margin-top:1rem;border-radius:4px;padding:9px 13px;font-size:12px;line-height:1.6;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.85);">
+      ⚠ Calculated commission is below RM 300 — minimum of <strong>RM 300</strong> will be applied.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">
+    <strong>Pro Event Solutions</strong><br>
+    Kota Kinabalu & Tuaran, Sabah · +60 18-357 0998 · proeventsolutions88@gmail.com
+  </div>
+  <div class="footer-right">
+    PES-COMM-2025<br>
+    CONFIDENTIAL — FOR DESIGNER USE ONLY<br>
+    © 2025 Pro Event Solutions. All rights reserved.
+  </div>
+</div>
+
+</div>
+
+<script>
+const pkgs = {
+  starter:  { min:5000,   max:10000,  step:500,  rate:0.10  },
+  medium:   { min:15000,  max:20000,  step:500,  rate:0.098 },
+  grow:     { min:25000,  max:50000,  step:1000, rate:0.09  },
+  gold:     { min:55000,  max:80000,  step:1000, rate:0.088 },
+  platinum: { min:85000,  max:100000, step:1000, rate:0.085 },
+};
+const labels = { starter:'Starter', medium:'Medium', grow:'Grow', gold:'Gold', platinum:'Platinum' };
+const MIN = 300;
+let cur = 'medium';
+let val = 17500;
+let dragging = false;
+
+function fmt(n)  { return 'RM ' + Math.round(n).toLocaleString('en-MY'); }
+function fmtN(n) { return Math.round(n).toLocaleString('en-MY'); }
+function rateLabel(r) { return parseFloat((r*100).toFixed(4)).toString() + '%'; }
+function snap(v,p) { return Math.round(v/p.step)*p.step; }
+function clamp(v,mn,mx) { return Math.max(mn,Math.min(mx,v)); }
+
+function updateThumb() {
+  const p = pkgs[cur];
+  const pct = (val - p.min) / (p.max - p.min);
+  document.getElementById('cFill').style.width  = (pct*100) + '%';
+  document.getElementById('cThumb').style.left  = (pct*100) + '%';
+}
+
+function calc() {
+  const p = pkgs[cur];
+  const isStarter = cur === 'starter';
+  const nett    = val * 0.20;
+  const rawComm = nett * p.rate;
+  const isMin   = rawComm < MIN;
+  const comm    = isStarter ? MIN : (isMin ? MIN : rawComm);
+  const perMs   = comm / 3;
+
+  document.getElementById('cValBig').textContent    = fmt(val);
+
+  if (isStarter) {
+    document.getElementById('cRateLabel').textContent  = 'Fixed commission';
+    document.getElementById('cResRate').textContent    = 'RM 300';
+    document.getElementById('cResRateSub').textContent = 'fixed — Starter package';
+  } else {
+    document.getElementById('cRateLabel').textContent  = 'Commission rate';
+    document.getElementById('cResRate').textContent    = rateLabel(p.rate);
+    document.getElementById('cResRateSub').textContent = labels[cur] + ' package';
+  }
+
+  document.getElementById('cResComm').textContent   = fmt(comm);
+  document.getElementById('cResCommSub').textContent= isStarter ? 'fixed rate — Starter package' : (isMin ? 'minimum RM 300 applied' : 'after deposit paid');
+  document.getElementById('cm1v').textContent = fmtN(val*0.30);
+  document.getElementById('cm2v').textContent = fmtN(val*0.40);
+  document.getElementById('cm3v').textContent = fmtN(val*0.30);
+  document.getElementById('cm1c').textContent = fmt(perMs);
+  document.getElementById('cm2c').textContent = fmt(perMs);
+  document.getElementById('cm3c').textContent = fmt(perMs);
+  document.getElementById('cMinWarn').style.display = (!isStarter && isMin) ? 'block' : 'none';
+  updateThumb();
+}
+
+function setFromPct(fraction) {
+  const p = pkgs[cur];
+  const raw = p.min + fraction * (p.max - p.min);
+  val = clamp(snap(raw, p), p.min, p.max);
+  calc();
+}
+
+function selPkg(btn) {
+  document.querySelectorAll('.cpkg').forEach(b => {
+    b.style.background = 'transparent';
+    b.style.borderColor = 'rgba(255,255,255,0.2)';
+    b.style.color = 'rgba(255,255,255,0.55)';
+  });
+  btn.style.background = 'rgba(255,255,255,0.2)';
+  btn.style.borderColor = 'rgba(255,255,255,0.6)';
+  btn.style.color = '#fff';
+  cur = btn.dataset.pkg;
+  const p = pkgs[cur];
+  val = snap((p.min + p.max) / 2, p);
+  document.getElementById('cHintRange').textContent = fmt(p.min) + ' – ' + fmt(p.max);
+  document.getElementById('cLimitMin').textContent  = fmt(p.min);
+  document.getElementById('cLimitMax').textContent  = fmt(p.max);
+  calc();
+}
+
+function trackPos(e, rect) {
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  return clamp((clientX - rect.left) / rect.width, 0, 1);
+}
+
+const wrap  = document.getElementById('cSliderWrap');
+const track = document.getElementById('cTrack');
+
+wrap.addEventListener('mousedown', e => {
+  dragging = true;
+  setFromPct(trackPos(e, track.getBoundingClientRect()));
+  e.preventDefault();
+});
+wrap.addEventListener('touchstart', e => {
+  dragging = true;
+  setFromPct(trackPos(e, track.getBoundingClientRect()));
+}, {passive:true});
+document.addEventListener('mousemove', e => { if (dragging) setFromPct(trackPos(e, track.getBoundingClientRect())); });
+document.addEventListener('touchmove', e => { if (dragging) setFromPct(trackPos(e, track.getBoundingClientRect())); }, {passive:true});
+document.addEventListener('mouseup',  () => dragging = false);
+document.addEventListener('touchend', () => dragging = false);
+
+calc();
+</script>
+</body>
+</html>
