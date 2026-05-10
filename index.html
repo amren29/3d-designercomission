@@ -464,10 +464,10 @@
           <span class="pkg-tier-badge badge-a">Standard</span>
         </td>
         <td><span class="mono">RM 5,000 – 10,000</span></td>
-        <td><span class="rate-tag rate-green">10%</span></td>
+        <td><span class="rate-tag rate-green">2%</span></td>
         <td>
-          <div class="comm-range">RM 100 – 200</div>
-          <div class="comm-note">min. RM 300 applied</div>
+          <div class="comm-range">RM 300</div>
+          <div class="comm-note">fixed minimum</div>
         </td>
       </tr>
       <tr>
@@ -476,7 +476,7 @@
           <span class="pkg-tier-badge badge-a">Standard</span>
         </td>
         <td><span class="mono">RM 15,000 – 20,000</span></td>
-        <td><span class="rate-tag rate-green">9.8%</span></td>
+        <td><span class="rate-tag rate-green">1.96%</span></td>
         <td>
           <div class="comm-range">RM 300 – 392</div>
           <div class="comm-note">min. RM 300 applied</div>
@@ -488,7 +488,7 @@
           <span class="pkg-tier-badge badge-b">Senior</span>
         </td>
         <td><span class="mono">RM 25,000 – 50,000</span></td>
-        <td><span class="rate-tag rate-blue">9%</span></td>
+        <td><span class="rate-tag rate-blue">1.8%</span></td>
         <td><div class="comm-range">RM 450 – 900</div></td>
       </tr>
       <tr>
@@ -497,7 +497,7 @@
           <span class="pkg-tier-badge badge-b">Senior</span>
         </td>
         <td><span class="mono">RM 55,000 – 80,000</span></td>
-        <td><span class="rate-tag rate-blue">8.8%</span></td>
+        <td><span class="rate-tag rate-blue">1.76%</span></td>
         <td><div class="comm-range">RM 968 – 1,408</div></td>
       </tr>
       <tr>
@@ -506,7 +506,7 @@
           <span class="pkg-tier-badge badge-b">Senior</span>
         </td>
         <td><span class="mono">RM 85,000 – 100,000</span></td>
-        <td><span class="rate-tag rate-blue">8.5%</span></td>
+        <td><span class="rate-tag rate-blue">1.7%</span></td>
         <td><div class="comm-range">RM 1,445 – 1,700</div></td>
       </tr>
     </tbody>
@@ -578,7 +578,7 @@
         </div>
         <div class="formula-step">
           <strong>Step 2 — Your Commission</strong>
-          Base amount × your package rate (8.5%–10%)<br>
+          Base amount × your package rate (1.7%–2% of project value)<br>
           <em>Rate is determined by the project package tier</em>
         </div>
         <div class="formula-step">
@@ -697,11 +697,11 @@
 
 <script>
 const pkgs = {
-  starter:  { min:5000,   max:10000,  step:500,  rate:0.10  },
-  medium:   { min:15000,  max:20000,  step:500,  rate:0.098 },
-  grow:     { min:25000,  max:50000,  step:1000, rate:0.09  },
-  gold:     { min:55000,  max:80000,  step:1000, rate:0.088 },
-  platinum: { min:85000,  max:100000, step:1000, rate:0.085 },
+  starter:  { min:5000,   max:10000,  step:500,  rate:0.10,  displayRate:2.0  },
+  medium:   { min:15000,  max:20000,  step:500,  rate:0.098, displayRate:1.96 },
+  grow:     { min:25000,  max:50000,  step:1000, rate:0.09,  displayRate:1.8  },
+  gold:     { min:55000,  max:80000,  step:1000, rate:0.088, displayRate:1.76 },
+  platinum: { min:85000,  max:100000, step:1000, rate:0.085, displayRate:1.7  },
 };
 const labels = { starter:'Starter', medium:'Medium', grow:'Grow', gold:'Gold', platinum:'Platinum' };
 const MIN = 300;
@@ -711,7 +711,7 @@ let dragging = false;
 
 function fmt(n)  { return 'RM ' + Math.round(n).toLocaleString('en-MY'); }
 function fmtN(n) { return Math.round(n).toLocaleString('en-MY'); }
-function rateLabel(r) { return parseFloat((r*100).toFixed(4)).toString() + '%'; }
+function rateLabel(p) { return p.displayRate + '% of project value'; }
 function snap(v,p) { return Math.round(v/p.step)*p.step; }
 function clamp(v,mn,mx) { return Math.max(mn,Math.min(mx,v)); }
 
@@ -739,8 +739,8 @@ function calc() {
     document.getElementById('cResRateSub').textContent = 'fixed — Starter package';
   } else {
     document.getElementById('cRateLabel').textContent  = 'Commission rate';
-    document.getElementById('cResRate').textContent    = rateLabel(p.rate);
-    document.getElementById('cResRateSub').textContent = labels[cur] + ' package';
+    document.getElementById('cResRate').textContent    = p.displayRate + '%';
+    document.getElementById('cResRateSub').textContent = 'of project value · ' + labels[cur];
   }
 
   document.getElementById('cResComm').textContent   = fmt(comm);
